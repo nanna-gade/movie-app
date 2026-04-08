@@ -33,3 +33,17 @@ console.log("Jeg fandt count:", countDisplay);
 const clickButton = document.querySelector("#click-button");
 const resetButton = document.querySelector("#reset-button");
 console.log("Jeg fandt knapperne:", clickButton, resetButton);
+
+// Ændr overskriften
+heading.textContent = "Wow, jeg kan ændre tekst!";
+
+// Ændr count tallet
+countDisplay.textContent = "42";
+
+// Ændr tekstfarve
+heading.style.color = "yellow";
+
+// Ændr baggrund på count
+countDisplay.style.backgroundColor = "rgba(255, 255, 255, 0.2)";
+countDisplay.style.padding = "10px";
+countDisplay.style.borderRadius = "10px";
