@@ -45,9 +45,9 @@ const movies = [
 
 const movieList = document.querySelector("#movie-list");
 
-showMovies();
+showMovies(movies);
 
-function showMovies() {
+function showMovies(movies) {
   movieList.innerHTML = "";
 
   for (const movie of movies) {
@@ -60,8 +60,7 @@ function showMovie(movie) {
     <article class="movie-card">
       <img class="movie-image" src="${movie.image}" alt="${movie.title}">
       <div class="movie-info">
-        <h3>${movie.title}</h3>
-        <p>År: ${movie.year}</p>
+        <h3>${formatMovieTitle(movie.title, movie.year)}</h3>
         <p>Rating: ${movie.rating}</p>
       </div>
     </article>
@@ -74,5 +73,6 @@ function formatMovieTitle(title, year) {
   return `${title} (${year})`;
 }
 
+console.log(formatMovieTitle("Inception", 2010));
 
 
