@@ -1,36 +1,46 @@
 "use strict";
 
-console.log("Movie App starter...");
-
 const movies = [
   {
     title: "Inception",
     year: 2010,
     rating: 8.8,
-    image: "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_.jpg",
-    genre: "Sci-fi",
+    image:
+      "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_.jpg",
   },
   {
     title: "The Matrix",
     year: 1999,
     rating: 8.7,
-    image: "https://m.media-amazon.com/images/M/MV5BN2NmN2VhMTQtMDNiOS00NDlhLTliMjgtODE2ZTY0ODQyNDRhXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
-    genre: "Action",
-  },
-  {
-    title: "Interstellar",
-    year: 2014,
-    rating: 8.6,
-    image: "https://m.media-amazon.com/images/M/MV5BYzdjMDAxZGItMjI2My00ODA1LTlkNzItOWFjMDU5ZDJlYWY3XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
-    genre: "Drama",
+    image: "https://m.media-amazon.com/images/I/51EG732BV3L.jpg",
   },
   {
     title: "The Dark Knight",
     year: 2008,
     rating: 9.0,
-    image: "https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_FMjpg_UX1000_.jpg",
-    genre: "Krimi",
-  }, 
+    image:
+      "https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_.jpg",
+  },
+  {
+    title: "The Shawshank Redemption",
+    year: 1994,
+    rating: 9.3,
+    image: "https://m.media-amazon.com/images/I/51NiGlapXlL._AC_.jpg",
+  },
+  {
+    title: "Oppenheimer",
+    year: 2023,
+    rating: 8.4,
+    image:
+      "https://m.media-amazon.com/images/M/MV5BN2JkMDc5MGQtZjg3YS00NmFiLWIyZmQtZTJmNTM5MjVmYTQ4XkEyXkFqcGc@._V1_.jpg",
+  },
+  {
+    title: "Dune",
+    year: 2021,
+    rating: 8.0,
+    image:
+      "https://upload.wikimedia.org/wikipedia/en/8/8e/Dune_%282021_film%29.jpg",
+  },
 ];
 
 const movieList = document.querySelector("#movie-list");
@@ -46,16 +56,13 @@ function showMovies() {
 }
 
 function showMovie(movie) {
-  const highlightClass = movie.rating > 8.5 ? "movie-card--highlight" : "";
-
   const html = /* html */ `
-    <article class="movie-card ${highlightClass}">
+    <article class="movie-card">
       <img class="movie-image" src="${movie.image}" alt="${movie.title}">
       <div class="movie-info">
         <h3>${movie.title}</h3>
         <p>År: ${movie.year}</p>
         <p>Rating: ${movie.rating}</p>
-        <p>Genre: ${movie.genre}</p>
       </div>
     </article>
   `;
@@ -63,27 +70,9 @@ function showMovie(movie) {
   movieList.insertAdjacentHTML("beforeend", html);
 }
 
-movies.push({
-  title: "Pulp Fiction",
-  year: 1994,
-  rating: 8.2,
-  image: "https://m.media-amazon.com/images/M/MV5BYTViYTE3ZGQtNDBlMC00ZTAyLTkyODMtZGRiZDg0MjA2YThkXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
-  genre: "Mørk komedie"
-});
-
-showMovies();
-
-function addMovie(movie) {
-  movies.push(movie);
-  showMovies ();
+function formatMovieTitle(title, year) {
+  return `${title} (${year})`;
 }
 
-addMovie({
-  title: "Blade Runner 2049",
-  year: 2017,
-  rating: 8.0,
-  image: "https://m.media-amazon.com/images/M/MV5BNzA1Njg4NzYxOV5BMl5BanBnXkFtZTgwODk5NjU3MzI@._V1_.jpg",
-  genre: "Sci-fi",
-});
 
 
