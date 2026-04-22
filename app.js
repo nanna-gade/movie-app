@@ -3,7 +3,11 @@
 const MOVIES_URL =
   "https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json";
 let allMovies = [];
+
 const movieList = document.querySelector("#movie-list");
+const genreSelect = document.querySelector("#genre-select");
+const movieCount = document.querySelector("#movie-count");
+const searchInput = document.querySelector("#search-input");
 
 fetchMovies();
 
@@ -11,11 +15,47 @@ async function fetchMovies() {
   const response = await fetch(MOVIES_URL);
   allMovies = await response.json();
 
-  showMovies(allMovies);
+  populateGenreSelect();
+  applyFilters();
+}
+
+function populateGenreSelect() {
+  const genres = new Set();
+
+  for (const movie of allMovies) {
+    for (const genre of movie.genre) {
+      genres.add(genre);
+    }
+  }
+
+  const sortedGenres = [...genres].sort((a, b) => a.localeCompare(b));
+
+  for (const genre of sortedGenres) {
+    genreSelect.insertAdjacentHTML(
+      "beforeend",
+      `<option value="${genre}">${genre}</option>`,
+    );
+  }
+}
+
+function applyFilters() {
+  const selectedGenre = genreSelect.value;
+  const searchValue = searchInput.value.trim().toLowerCase();
+
+  const filteredMovies = allMovies.filter(function (movie) {
+    const matchesGenre =
+      selectedGenre === "all" || movie.genre.includes(selectedGenre);
+    const matchesSearch = movie.title.toLowerCase().includes(searchValue);
+
+    return matchesGenre && matchesSearch;
+  });
+
+  showMovies(filteredMovies);
 }
 
 function showMovies(movies) {
   movieList.innerHTML = "";
+  movieCount.textContent = `Viser ${movies.length} film`;
 
   for (const movie of movies) {
     showMovie(movie);
@@ -30,9 +70,13 @@ function showMovie(movie) {
         <h3>${movie.title}</h3>
         <p>År: ${movie.year}</p>
         <p>Rating: ${movie.rating}</p>
+        <p class="genre">${movie.genre.join(", ")}</p>
       </div>
     </article>
   `;
 
   movieList.insertAdjacentHTML("beforeend", html);
 }
+
+genreSelect.addEventListener("change", applyFilters);
+searchInput.addEventListener("input", applyFilters);
