@@ -6,6 +6,7 @@ let allMovies = [];
 
 const movieList = document.querySelector("#movie-list");
 const genreSelect = document.querySelector("#genre-select");
+const searchInput = document.querySelector("#genre-select");
 const movieCount = document.querySelector("#movie-count");
 const searchInput = document.querySelector("#search-input");
 
